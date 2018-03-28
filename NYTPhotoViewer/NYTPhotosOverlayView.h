@@ -21,11 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) UINavigationBar *navigationBar;
 
 /**
- *  The title of the overlay. Centered between the left and right bar button items.
- */
-@property (nonatomic, copy, nullable) NSString *title;
-
-/**
  *  The attributes of the overlay's title.
  */
 @property(nonatomic, copy, nullable) NSDictionary <NSString *, id> *titleTextAttributes;

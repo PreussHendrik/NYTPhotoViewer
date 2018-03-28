@@ -124,9 +124,7 @@
     // It's necessarry to first assign the UIImage so calulations for layout go right (see above)
     self.imageView.animatedImage = [[FLAnimatedImage alloc] initWithAnimatedGIFData:imageData];
 #endif
-    
     self.imageView.frame = CGRectMake(0, 0, imageToUse.size.width, imageToUse.size.height);
-    
     self.contentSize = imageToUse.size;
     
     [self updateZoomScale];
@@ -153,9 +151,8 @@
         CGFloat scaleHeight = scrollViewFrame.size.height / self.imageView.image.size.height;
         CGFloat minScale = MIN(scaleWidth, scaleHeight);
         
-        self.minimumZoomScale = minScale;
+        self.minimumZoomScale = scaleHeight;
         self.maximumZoomScale = MAX(minScale, self.maximumZoomScale);
-        
         self.zoomScale = self.minimumZoomScale;
         
         // scrollView.panGestureRecognizer.enabled is on by default and enabled by
@@ -176,6 +173,10 @@
     
     if (self.contentSize.width < CGRectGetWidth(self.bounds)) {
         horizontalInset = (CGRectGetWidth(self.bounds) - self.contentSize.width) * 0.5;
+    }
+    
+    if (self.contentSize.width > CGRectGetWidth(self.bounds)) {
+        horizontalInset = ((CGRectGetWidth(self.bounds)) - self.contentSize.width) / 2;
     }
     
     if (self.contentSize.height < CGRectGetHeight(self.bounds)) {

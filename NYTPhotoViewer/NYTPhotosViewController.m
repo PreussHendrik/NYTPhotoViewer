@@ -106,8 +106,8 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtonImageInsets = {3, 0,
 
     [self configurePageViewControllerWithInitialPhoto];
 
-    self.view.tintColor = [UIColor whiteColor];
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.tintColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.pageViewController.view.backgroundColor = [UIColor clearColor];
 
     [self.pageViewController.view addGestureRecognizer:self.panGestureRecognizer];
@@ -197,9 +197,9 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtonImageInsets = {3, 0,
 
     _overlayView = ({
         NYTPhotosOverlayView *v = [[NYTPhotosOverlayView alloc] initWithFrame:CGRectZero];
-        v.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NYTPhotoViewerCloseButtonX" inBundle:[NSBundle nyt_photoViewerResourceBundle] compatibleWithTraitCollection:nil] landscapeImagePhone:[UIImage imageNamed:@"NYTPhotoViewerCloseButtonXLandscape" inBundle:[NSBundle nyt_photoViewerResourceBundle] compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonTapped:)];
-        v.leftBarButtonItem.imageInsets = NYTPhotosViewControllerCloseButtonImageInsets;
-        v.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonTapped:)];
+        v.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NYTPhotoViewerCloseButtonX" inBundle:[NSBundle nyt_photoViewerResourceBundle] compatibleWithTraitCollection:nil] landscapeImagePhone:[UIImage imageNamed:@"NYTPhotoViewerCloseButtonXLandscape" inBundle:[NSBundle nyt_photoViewerResourceBundle] compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonTapped:)];
+        v.rightBarButtonItem.imageInsets = NYTPhotosViewControllerCloseButtonImageInsets;
+        v.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonTapped:)];
         v;
     });
 
@@ -227,7 +227,7 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtonImageInsets = {3, 0,
 - (void)addOverlayView {
     NSAssert(self.overlayView != nil, @"_overlayView must be set during initialization, to provide bar button items for this %@", NSStringFromClass([self class]));
 
-    UIColor *textColor = self.view.tintColor ?: [UIColor whiteColor];
+    UIColor *textColor = [UIColor blackColor];
     self.overlayView.titleTextAttributes = @{NSForegroundColorAttributeName: textColor};
     
     [self updateOverlayInformation];
@@ -238,23 +238,7 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtonImageInsets = {3, 0,
 
 
 - (void)updateOverlayInformation {
-    NSString *overlayTitle;
     NSUInteger photoIndex = [self.dataSource indexOfPhoto:self.currentlyDisplayedPhoto];
-    NSInteger displayIndex = photoIndex + 1;
-    
-    if ([self.delegate respondsToSelector:@selector(photosViewController:titleForPhoto:atIndex:totalPhotoCount:)]) {
-        overlayTitle = [self.delegate photosViewController:self titleForPhoto:self.currentlyDisplayedPhoto atIndex:photoIndex totalPhotoCount:self.dataSource.numberOfPhotos];
-    }
-
-    if (!overlayTitle && self.dataSource.numberOfPhotos == nil) {
-        overlayTitle = [NSString localizedStringWithFormat:@"%lu", (unsigned long)displayIndex];
-    }
-    
-    if (!overlayTitle && self.dataSource.numberOfPhotos.integerValue > 1) {
-        overlayTitle = [NSString localizedStringWithFormat:NSLocalizedString(@"%lu of %lu", nil), (unsigned long)displayIndex, (unsigned long)self.dataSource.numberOfPhotos.integerValue];
-    }
-    
-    self.overlayView.title = overlayTitle;
     
     UIView *captionView;
     if ([self.delegate respondsToSelector:@selector(photosViewController:captionViewForPhoto:)]) {

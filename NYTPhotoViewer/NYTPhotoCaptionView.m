@@ -107,7 +107,6 @@ static const CGFloat NYTPhotoCaptionViewVerticalMargin = 7.0;
 
     [self setupTextView];
     [self updateTextViewAttributedText];
-    [self setupGradient];
 }
 
 - (void)setupTextView {
@@ -126,13 +125,6 @@ static const CGFloat NYTPhotoCaptionViewVerticalMargin = 7.0;
     NSLayoutConstraint *horizontalPositionConstraint = [NSLayoutConstraint constraintWithItem:self.textView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
     
     [self addConstraints:@[topConstraint, bottomConstraint, widthConstraint, horizontalPositionConstraint]];
-}
-
-- (void)setupGradient {
-    self.gradientLayer = [CAGradientLayer layer];
-    self.gradientLayer.frame = self.layer.bounds;
-    self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor clearColor].CGColor, (id)[[UIColor blackColor] colorWithAlphaComponent:0.85].CGColor, nil];
-    [self.layer insertSublayer:self.gradientLayer atIndex:0];
 }
 
 - (void)updateTextViewAttributedText {

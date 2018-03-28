@@ -67,7 +67,6 @@
 - (void)setupNavigationBar {
     self.navigationBar = [[UINavigationBar alloc] init];
     self.navigationBar.translatesAutoresizingMaskIntoConstraints = NO;
-    
     // Make navigation bar background fully transparent.
     self.navigationBar.backgroundColor = [UIColor clearColor];
     self.navigationBar.barTintColor = nil;
@@ -148,14 +147,6 @@
 
 - (void)setRightBarButtonItems:(NSArray *)rightBarButtonItems {
     [self.navigationItem setRightBarButtonItems:rightBarButtonItems animated:NO];
-}
-
-- (NSString *)title {
-    return self.navigationItem.title;
-}
-
-- (void)setTitle:(NSString *)title {
-    self.navigationItem.title = title;
 }
 
 - (NSDictionary *)titleTextAttributes {
