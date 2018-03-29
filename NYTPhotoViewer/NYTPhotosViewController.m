@@ -193,7 +193,7 @@ static const UIEdgeInsets NYTPhotosViewControllerCloseButtonImageInsets = {3, 0,
     _transitionController = [[NYTPhotoTransitionController alloc] init];
     self.modalPresentationStyle = UIModalPresentationCustom;
     self.transitioningDelegate = _transitionController;
-    self.modalPresentationCapturesStatusBarAppearance = YES;
+    self.modalPresentationCapturesStatusBarAppearance = NO;
 
     _overlayView = ({
         NYTPhotosOverlayView *v = [[NYTPhotosOverlayView alloc] initWithFrame:CGRectZero];
